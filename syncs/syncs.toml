@@ -5,3 +5,4 @@ git_provider = "github.com"
 git_account = "Nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 resource_path = ["truenas/server.toml", "truenas/stacks.toml"]
+pending_alert = false
