@@ -4,7 +4,7 @@ tags = ["truenas"]
 [stack.config]
 server = "truenas"
 poll_for_updates = true
-git_account = "Nomsplease"
+git_account = "nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/channels-dvr"
 
