@@ -199,7 +199,7 @@ repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/plex-auto-languages"
 pre_deploy.command = """
 ## Inject 1Pass Secrets
-op inject -f -i secrets.env.tpl -o .env
+op inject -f -i secrets.env -o secrets.env
 """
 
 ## Postgres
