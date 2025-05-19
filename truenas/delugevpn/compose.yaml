@@ -24,22 +24,23 @@ services:
       - traefik.http.services.delugevpn.loadbalancer.server.scheme=http
       - traefik.http.routers.delugevpn.service=delugevpn
       - traefik.http.routers.delugevpn.tls=true
-  mamip:
-    command:
-      - sh
-      - /scripts/mam_ip.sh
-    container_name: script-mam-ip
-    depends_on:
-      - delugevpn
-    image: alpine:latest
-    network_mode: service:delugevpn
-    restart: always
-    volumes:
-      - /mnt/AppData/Deluge/scripts:/scripts
+  # mamip:
+  #   command:
+  #     - sh
+  #     - /scripts/mam_ip.sh
+  #   container_name: script-mam-ip
+  #   depends_on:
+  #     - delugevpn
+  #   image: alpine:latest
+  #   network_mode: service:delugevpn
+  #   restart: always
+  #   volumes:
+  #     - /mnt/AppData/Deluge/scripts:/scripts
 networks:
   default:
-    name: media_services
-    external: true
+    name: deluge_test
+    # name: media_services
+    # external: true
   traefik_proxy:
     name: traefik_proxy
     external: true
