@@ -1,0 +1,13 @@
+services:
+  channels-dvr:
+    container_name: channels-dvr
+    devices:
+      - /dev/dri:/dev/dri
+    image: fancybits/channels-dvr:tve
+    network_mode: host
+    ports:
+      - '8089:8089'
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Channels:/channels-dvr
+      - /mnt/BigPool/Media/DVR:/DVR
