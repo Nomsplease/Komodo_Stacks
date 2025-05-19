@@ -1,0 +1,42 @@
+services:
+  prowlarr:
+    container_name: prowlarr
+    networks:
+      - default
+      - database_network
+      - traefik_proxy
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/New_York
+    image: lscr.io/linuxserver/prowlarr:latest
+    # ports:
+    #   - '9696:9696'
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Prowlarr:/config
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prowlarr.entrypoints=websecure
+      - traefik.http.routers.prowlarr.rule=Host(`prowlarr.noms.tv`)
+      - traefik.http.services.prowlarr.loadbalancer.server.port=9696
+      - traefik.http.services.prowlarr.loadbalancer.server.scheme=http
+      - traefik.http.routers.prowlarr.service=prowlarr
+      - traefik.http.routers.prowlarr.tls=true
+      ###
+      # Authentik Enablement
+      - traefik.http.routers.prowlarr.middlewares=authentik@file
+      - traefik.http.routers.prowlarr.priority=10
+      - traefik.http.routers.prowlarr-auth.rule=Host(`prowlarr.noms.tv`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.prowlarr-auth.priority=15
+      ###
+networks:
+  default:
+    name: media_services
+    external: true
+  database_network:
+    name: database_network
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
+    external: true

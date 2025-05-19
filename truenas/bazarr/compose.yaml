@@ -1,0 +1,39 @@
+services:
+  bazarr:
+    container_name: bazarr
+    networks:
+      - default
+      - traefik_proxy
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/New_York
+    image: lscr.io/linuxserver/bazarr:latest
+    ports:
+      - '9707:9707'
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Bazarr:/config
+      - /mnt/BigPool/Media:/PlexMedia
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.bazarr.entrypoints=websecure
+      - traefik.http.routers.bazarr.rule=Host(`bazarr.noms.tv`)
+      - traefik.http.services.bazarr.loadbalancer.server.port=9707
+      - traefik.http.services.bazarr.loadbalancer.server.scheme=http
+      - traefik.http.routers.bazarr.service=bazarr
+      - traefik.http.routers.bazarr.tls=true
+      ###
+      # Authentik Enablement
+      - traefik.http.routers.bazarr.middlewares=authentik@file
+      - traefik.http.routers.bazarr.priority=10
+      - traefik.http.routers.bazarr-auth.rule=Host(`bazarr.noms.tv`) && PathPrefix(`/outpost.goauthentik.io/`)
+      - traefik.http.routers.bazarr-auth.priority=15
+      ###
+networks:
+  default:
+    name: media_services
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
+    external: true

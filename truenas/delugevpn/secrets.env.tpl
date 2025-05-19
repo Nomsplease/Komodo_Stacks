@@ -1,0 +1,10 @@
+PUID=568
+PGID=568
+DELUGE_ENABLE_WEBUI_PASSWORD=no
+VPN_ENABLED=yes
+VPN_CLIENT=openvpn
+VPN_USER="op://Komodo/deluge/vpnUser"
+VPN_PASS="op://Komodo/deluge/vpnPassword"
+VPN_PROV="op://Komodo/deluge/vpnServiceProvider"
+STRICT_PORT_FORWARD=yes
+LAN_NETWORK=172.16.0.0/24,172.16.1.0/24,10.0.3.0/24

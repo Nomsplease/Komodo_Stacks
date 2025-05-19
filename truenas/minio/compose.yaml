@@ -1,0 +1,32 @@
+services:
+  minio:
+    container_name: minio
+    command: server /data --console-address ":9001"
+    networks:
+      - traefik_proxy
+    env_file: .env
+    image: minio/minio:latest
+    # ports:
+    #   - '9000:9000'
+    #   - '9001:9001'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.minio.entrypoints=websecure
+      - traefik.http.routers.minio.rule=Host(`minio.noms.tv`)
+      - traefik.http.services.minio.loadbalancer.server.port=9001
+      - traefik.http.services.minio.loadbalancer.server.scheme=http
+      - traefik.http.routers.minio.service=minio
+      - traefik.http.routers.minio.tls=true
+      - traefik.http.routers.miniodata.entrypoints=websecure
+      - traefik.http.routers.miniodata.rule=Host(`s3.noms.tv`)
+      - traefik.http.services.miniodata.loadbalancer.server.port=9000
+      - traefik.http.services.miniodata.loadbalancer.server.scheme=http
+      - traefik.http.routers.miniodata.service=miniodata
+      - traefik.http.routers.miniodata.tls=true
+    restart: unless-stopped
+    volumes:
+      - /mnt/BigPool/AppData/Minio:/data
+networks:
+  traefik_proxy:
+    name: traefik_proxy
+    external: true

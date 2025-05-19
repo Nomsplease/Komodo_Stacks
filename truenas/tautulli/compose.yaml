@@ -1,0 +1,31 @@
+services:
+  tautulli:
+    container_name: tautulli
+    networks:
+      - default
+      - traefik_proxy
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/New_York
+    image: lscr.io/linuxserver/tautulli:latest
+    ports:
+      - '8181:8181'
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Tautulli:/config
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.tautulli.entrypoints=websecure
+      - traefik.http.routers.tautulli.rule=Host(`tautulli.noms.tv`)
+      - traefik.http.services.tautulli.loadbalancer.server.port=8181
+      - traefik.http.services.tautulli.loadbalancer.server.scheme=http
+      - traefik.http.routers.tautulli.service=tautulli
+      - traefik.http.routers.tautulli.tls=true
+networks:
+  default:
+    name: media_services
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
+    external: true

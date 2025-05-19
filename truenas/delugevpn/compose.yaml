@@ -1,0 +1,39 @@
+services:
+  delugevpn:
+    cap_add:
+      - NET_ADMIN
+    container_name: delugevpn
+    env_file: ./.env
+    image: binhex/arch-delugevpn:latest
+    ports:
+      - '8112:8112'
+    restart: always
+    volumes:
+      - /mnt/AppData/Deluge/config:/config
+      - /mnt/Scratch/Downloads:/ScratchDownloads
+      - /mnt/BigPool/Downloads:/BigPoolDownloads
+      - /etc/localtime:/etc/localtime:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.delugevpn.entrypoints=websecure
+      - traefik.http.routers.delugevpn.rule=Host(`deluge.noms.tv`)
+      - traefik.http.services.delugevpn.loadbalancer.server.port=8112
+      - traefik.http.services.delugevpn.loadbalancer.server.scheme=http
+      - traefik.http.routers.delugevpn.service=delugevpn
+      - traefik.http.routers.delugevpn.tls=true
+  mamip:
+    command:
+      - sh
+      - /scripts/mam_ip.sh
+    container_name: script-mam-ip
+    depends_on:
+      - delugevpn
+    image: alpine:latest
+    network_mode: service:delugevpn
+    restart: always
+    volumes:
+      - /mnt/AppData/Deluge/scripts:/scripts
+networks:
+  default:
+    name: media_services
+    external: true

@@ -1,0 +1,31 @@
+####################################
+# 🦎 KOMODO COMPOSE - PERIPHERY 🦎 #
+####################################
+
+## This compose file will deploy:
+##   1. Komodo Periphery
+
+services:
+  periphery:
+    image: ghcr.io/moghtech/komodo-periphery:${COMPOSE_KOMODO_IMAGE_TAG:-latest}
+    container_name: komodo-periphery
+    env_file: ./.env
+    labels:
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    restart: unless-stopped
+    logging:
+      driver: ${COMPOSE_LOGGING_DRIVER:-local}
+    ## https://komo.do/docs/connect-servers#configuration
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/proc
+      - /mnt/AppData/Komodo:/mnt/AppData/Komodo
+      - /mnt/AppData/Komodo/op:/usr/bin/op
+    ports:
+      - 8120:8120
+
+networks:
+  default: {}
+  # traefik_proxy:
+  #   name: traefik_proxy
+  #   external: true

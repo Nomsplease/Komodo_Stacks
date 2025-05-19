@@ -1,0 +1,3 @@
+PLEX_URL="op://Komodo/plex/URL"
+PLEX_TOKEN="op://Komodo/plex/Token"
+TZ=America/New_York

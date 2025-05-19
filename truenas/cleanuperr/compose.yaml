@@ -1,0 +1,17 @@
+services:
+  cleanuperr:
+    container_name: cleanuperr
+    networks:
+      - default
+    env_file: .env
+    image: ghcr.io/flmorg/cleanuperr:latest
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Cleanuperr/logs:/var/logs
+      - /mnt/Scratch/Downloads:/ScratchDownloads
+      - /mnt/BigPool/Downloads:/BigPoolDownloads
+      - /mnt/BigPool/Media:/BigPoolMedia
+networks:
+  default:
+    name: media_services
+    external: true

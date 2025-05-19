@@ -1,0 +1,25 @@
+services:
+  audiobookshelf:
+    container_name: audiobookshelf
+    networks:
+      - default
+      - traefik_proxy
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/New_York
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - '13378:13378'
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Audiobookshelf/config:/config
+      - /mnt/AppData/Audiobookshelf/metadata:/metadata
+      - /mnt/BigPool/Media:/data
+networks:
+  default:
+    name: media_services
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
+    external: true

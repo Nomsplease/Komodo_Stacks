@@ -1,0 +1,19 @@
+services:
+  sabnzbd:
+    container_name: sabnzbd
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/New_York
+    image: lscr.io/linuxserver/sabnzbd:latest
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Sabnzbd/config:/config
+      - /mnt/Scratch/Downloads:/ScratchDownloads
+      - /mnt/BigPool/Downloads:/BigPoolDownloads
+networks:
+  default:
+    name: media_services
+    external: true

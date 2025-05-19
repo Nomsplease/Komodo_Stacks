@@ -1,0 +1,22 @@
+services:
+  kometa:
+    container_name: kometa
+    networks:
+      - default
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/New_York
+      - KOMETA_CONFIG=/config/config.yaml
+      - KOMETA_TIME=00:05,02:05,04:05,06:05,08:05,10:05,12:05,14:05,16:05,18:05,20:05,22:05
+      - KOMETA_RUN=False
+      - KOMETA_TEST=False
+      - KOMETA_NO_MISSING=False
+    image: lscr.io/linuxserver/kometa:latest
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Kometa:/config
+networks:
+  default:
+    name: media_services
+    external: true

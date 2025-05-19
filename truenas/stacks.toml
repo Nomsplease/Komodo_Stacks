@@ -1,3 +1,43 @@
+## Audiobookshelf
+[[stack]]
+name = "audiobookshelf"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/audiobookshelf"
+
+## Authentik
+[[stack]]
+name = "authentik"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/authentik"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env.tpl -o .env
+"""
+
+## Bazarr
+[[stack]]
+name = "bazarr"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/bazarr"
+
 ## Channels DVR
 [[stack]]
 name = "channels-dvr"
@@ -10,6 +50,130 @@ git_account = "nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/channels-dvr"
 
+## Cleanuperr
+[[stack]]
+name = "cleanuperr"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/cleanuperr"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env.tpl -o .env
+"""
+
+# ## Deluge VPN
+# [[stack]]
+# name = "delugevpn"
+# tags = ["truenas"]
+# [stack.config]
+# server = "truenas"
+# poll_for_updates = true
+# auto_update = true
+# git_account = "nomsplease"
+# repo = "Nomsplease/Komodo_Stacks"
+# run_directory = "truenas/delugevpn"
+# pre_deploy.command = """
+# ## Inject 1Pass Secrets
+# op inject -f -i secrets.env.tpl -o .env
+# """
+
+## Huntarr
+[[stack]]
+name = "huntarr"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/huntarr"
+
+## Jellyfin
+[[stack]]
+name = "jellyfin"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/jellyfin"
+
+## Kometa
+[[stack]]
+name = "kometa"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/kometa"
+
+## Lancache
+[[stack]]
+name = "lancache"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/lancache"
+
+## Minio
+[[stack]]
+name = "minio"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/minio"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env.tpl -o .env
+"""
+
+## Overseerr
+[[stack]]
+name = "overseerr"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/overseerr"
+
+## Periphery
+[[stack]]
+name = "periphery"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/periphery"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env.tpl -o .env
+"""
+
 ## Plex
 [[stack]]
 name = "plex"
@@ -21,6 +185,122 @@ auto_update = true
 git_account = "nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/plex"
+
+## Plex Auto Languages
+[[stack]]
+name = "plex-auto-languages"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/plex-auto-languages"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env.tpl -o .env
+"""
+
+## Postgres
+[[stack]]
+name = "postgres"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/postgres"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env.tpl -o .env
+"""
+
+## Prowlarr
+[[stack]]
+name = "prowlarr"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/prowlarr"
+
+## Radarr
+[[stack]]
+name = "radarr"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/radarr"
+
+## Readarr
+[[stack]]
+name = "readarr"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/readarr"
+
+# ## Sabnzbd
+# [[stack]]
+# name = "sabnzbd"
+# tags = ["truenas"]
+# [stack.config]
+# server = "truenas"
+# poll_for_updates = true
+# auto_update = true
+# git_account = "nomsplease"
+# repo = "Nomsplease/Komodo_Stacks"
+# run_directory = "truenas/sabnzbd"
+
+## Sonarr
+[[stack]]
+name = "sonarr"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/sonarr"
+
+## Tatulli
+[[stack]]
+name = "tatulli"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/tatulli"
+
+# ## Tdarr
+# [[stack]]
+# name = "tdarr"
+# tags = ["truenas"]
+# [stack.config]
+# server = "truenas"
+# poll_for_updates = true
+# auto_update = true
+# git_account = "nomsplease"
+# repo = "Nomsplease/Komodo_Stacks"
+# run_directory = "truenas/tdarr"
 
 ## Traefik
 [[stack]]
