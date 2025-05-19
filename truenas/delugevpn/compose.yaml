@@ -5,6 +5,9 @@ services:
     container_name: delugevpn
     env_file: secrets.env
     image: binhex/arch-delugevpn:latest
+    networks:
+      - default
+      - traefik_proxy
     ports:
       - '8112:8112'
     restart: always
@@ -36,4 +39,7 @@ services:
 networks:
   default:
     name: media_services
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
     external: true

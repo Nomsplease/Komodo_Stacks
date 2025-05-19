@@ -6,6 +6,9 @@ services:
       - PGID=568
       - TZ=America/New_York
     image: lscr.io/linuxserver/sabnzbd:latest
+    networks:
+      - default
+      - traefik_proxy
     ports:
       - '8080:8080'
     restart: unless-stopped
@@ -16,4 +19,7 @@ services:
 networks:
   default:
     name: media_services
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
     external: true
