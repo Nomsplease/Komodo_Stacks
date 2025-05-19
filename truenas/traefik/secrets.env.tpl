@@ -1,0 +1,1 @@
+CF_DNS_API_TOKEN="op://Komodo/Traefik/CF_DNS_API_TOKEN"

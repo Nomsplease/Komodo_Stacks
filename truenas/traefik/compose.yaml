@@ -1,0 +1,26 @@
+services:
+  proxy:
+    command:
+      - --configFile=/config/config.yaml
+    image: traefik:v3
+    container_name: traefik
+    networks:
+      - traefik_proxy
+    ports:
+      - 172.16.1.10:80:80
+      - 172.16.1.10:443:443
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /mnt/AppData/Traefik/letsencrypt:/letsencrypt
+      - /mnt/AppData/Traefik/config:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+networks:
+  traefik_proxy:
+   name: traefik_proxy
+   driver: bridge
+   ipam:
+     config:
+       - subnet: 10.0.1.0/24
+         gateway: 10.0.1.1
