@@ -278,9 +278,9 @@ git_account = "Nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/sonarr"
 
-## Tatulli
+## Tautulli
 [[stack]]
-name = "tatulli"
+name = "tautulli"
 tags = ["truenas"]
 [stack.config]
 server = "truenas"
@@ -288,7 +288,7 @@ poll_for_updates = true
 auto_update = true
 git_account = "Nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
-run_directory = "truenas/tatulli"
+run_directory = "truenas/tautulli"
 
 # ## Tdarr
 # [[stack]]
