@@ -1,0 +1,7 @@
+[[resource_sync]]
+name = "truenas-resource-sync"
+[resource_sync.config]
+git_provider = "github.com"
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+resource_path = ["truenas/server.toml", "truenas/stacks.toml"]

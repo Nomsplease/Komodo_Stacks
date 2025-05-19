@@ -1,0 +1,6 @@
+[[server]] # Declare a new server
+name = "truenas"
+tags = ["truenas"]
+[server.config]
+address = "http://172.16.1.10:8120"
+enabled = true
