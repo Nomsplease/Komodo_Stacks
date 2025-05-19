@@ -2,7 +2,7 @@ services:
   mediadb:
     image: postgres:17.5
     container_name: mediadb
-    env_file: ./.env
+    env_file: secrets.env
     networks:
       - deafult
     restart: unless-stopped
@@ -16,7 +16,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pgadmin
-    env_file: ./.env
+    env_file: secrets.env
     networks:
       - deafult
       - traefik_proxy

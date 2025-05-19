@@ -3,7 +3,7 @@ services:
     cap_add:
       - NET_ADMIN
     container_name: delugevpn
-    env_file: ./.env
+    env_file: secrets.env
     image: binhex/arch-delugevpn:latest
     ports:
       - '8112:8112'

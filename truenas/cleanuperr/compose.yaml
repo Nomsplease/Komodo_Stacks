@@ -3,7 +3,7 @@ services:
     container_name: cleanuperr
     networks:
       - default
-    env_file: .env
+    env_file: secrets.env
     image: ghcr.io/flmorg/cleanuperr:latest
     restart: unless-stopped
     volumes:

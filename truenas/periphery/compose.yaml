@@ -9,7 +9,7 @@ services:
   periphery:
     image: ghcr.io/moghtech/komodo-periphery:${COMPOSE_KOMODO_IMAGE_TAG:-latest}
     container_name: komodo-periphery
-    env_file: ./.env
+    env_file: secrets.env
     labels:
       komodo.skip: # Prevent Komodo from stopping with StopAllContainers
     restart: unless-stopped

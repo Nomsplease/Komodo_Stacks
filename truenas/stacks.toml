@@ -23,7 +23,7 @@ repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/authentik"
 pre_deploy.command = """
 ## Inject 1Pass Secrets
-op inject -f -i secrets.env.tpl -o .env
+op inject -f -i secrets.env -o secrets.env
 """
 
 ## Bazarr
@@ -63,7 +63,7 @@ repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/cleanuperr"
 pre_deploy.command = """
 ## Inject 1Pass Secrets
-op inject -f -i secrets.env.tpl -o .env
+op inject -f -i secrets.env -o secrets.env
 """
 
 # ## Deluge VPN
@@ -79,7 +79,7 @@ op inject -f -i secrets.env.tpl -o .env
 # run_directory = "truenas/delugevpn"
 # pre_deploy.command = """
 # ## Inject 1Pass Secrets
-# op inject -f -i secrets.env.tpl -o .env
+# op inject -f -i secrets.env -o secrets.env
 # """
 
 ## Huntarr
@@ -143,7 +143,7 @@ repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/minio"
 pre_deploy.command = """
 ## Inject 1Pass Secrets
-op inject -f -i secrets.env.tpl -o .env
+op inject -f -i secrets.env -o secrets.env
 """
 
 ## Overseerr
@@ -171,7 +171,7 @@ repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/periphery"
 pre_deploy.command = """
 ## Inject 1Pass Secrets
-op inject -f -i secrets.env.tpl -o .env
+op inject -f -i secrets.env -o secrets.env
 """
 
 ## Plex
@@ -215,7 +215,7 @@ repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/postgres"
 pre_deploy.command = """
 ## Inject 1Pass Secrets
-op inject -f -i secrets.env.tpl -o .env
+op inject -f -i secrets.env -o secrets.env
 """
 
 ## Prowlarr
@@ -315,5 +315,5 @@ repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/traefik"
 pre_deploy.command = """
 ## Inject 1Pass Secrets
-op inject -f -i secrets.env.tpl -o .env
+op inject -f -i secrets.env -o secrets.env
 """

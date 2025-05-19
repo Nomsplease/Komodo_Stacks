@@ -4,6 +4,7 @@ services:
       - --configFile=/config/config.yaml
     image: traefik:v3
     container_name: traefik
+    env_file: secrets.env
     networks:
       - traefik_proxy
     ports:

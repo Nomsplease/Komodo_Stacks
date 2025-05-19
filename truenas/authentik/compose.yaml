@@ -3,7 +3,7 @@ services:
     container_name: authentik-proxy
     networks:
       - traefik_proxy
-    env_file: .env
+    env_file: secrets.env
     image: ghcr.io/goauthentik/proxy:2024.10.5
     ports:
       - '9000:9000'
