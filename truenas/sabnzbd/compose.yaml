@@ -16,6 +16,14 @@ services:
       - /mnt/AppData/Sabnzbd/config:/config
       - /mnt/Scratch/Downloads:/ScratchDownloads
       - /mnt/BigPool/Downloads:/BigPoolDownloads
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.sabnzbd.entrypoints=websecure
+      - traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.noms.tv`)
+      - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
+      - traefik.http.services.sabnzbd.loadbalancer.server.scheme=http
+      - traefik.http.routers.sabnzbd.service=sabnzbd
+      - traefik.http.routers.sabnzbd.tls=true
 networks:
   default:
     name: media_services
