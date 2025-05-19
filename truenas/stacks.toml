@@ -5,6 +5,7 @@ tags = ["truenas"]
 [stack.config]
 server = "truenas"
 poll_for_updates = true
+auto_update = true
 git_account = "nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/channels-dvr"
@@ -16,6 +17,7 @@ tags = ["truenas"]
 [stack.config]
 server = "truenas"
 poll_for_updates = true
+auto_update = true
 git_account = "nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/plex"
