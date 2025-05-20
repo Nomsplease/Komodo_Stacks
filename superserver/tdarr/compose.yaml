@@ -1,0 +1,22 @@
+services:
+  tdarr-node:
+    container_name: tdarr-node
+    image: ghcr.io/haveagitgat/tdarr_node:latest
+    restart: unless-stopped
+    environment:
+      - TZ=America/New_York
+      - PUID=568
+      - PGID=568
+      - UMASK_SET=002
+      - nodeName=SuperServer
+      - serverIP=172.16.1.10
+      - serverPort=8266
+      - inContainer=true
+      - ffmpegVersion=7
+    volumes:
+      - /data/containers/Tdarr/configs:/app/configs
+      - /data/containers/Tdarr/logs:/app/logs
+      - /mnt/truenas/media:/media
+      - /mnt/truenas/scratch-tdarr/Node-SuperServer:/temp
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128

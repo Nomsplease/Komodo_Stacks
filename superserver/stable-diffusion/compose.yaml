@@ -1,0 +1,56 @@
+services:
+  stable-diffusion-download:
+    build: ./stable-diffusion-webui-docker/services/download/
+    image: comfy-download
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /data/containers/stable-diffusion-webui-docker/data:/data
+  stable-diffusion-webui:
+    build: ./stable-diffusion-webui-docker/services/comfy/
+    image: comfy-ui
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - CLI_ARGS=
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /data/containers/stable-diffusion-webui-docker/data:/data
+      - /data/containers/stable-diffusion-webui-docker/output:/output
+    stop_signal: SIGKILL
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids:
+                - "0"
+              capabilities:
+                - compute
+                - utility
+    restart: unless-stopped
+    networks:
+      - traefik_proxy
+    ports:
+      - 7860:7860 # Add this line to expose the port
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.stable-diffusion.entrypoints=websecure
+      - traefik.http.routers.stable-diffusion.rule=Host(`stable.noms.tv`)
+      - traefik.http.services.stable-diffusion.loadbalancer.server.port=7860
+      - traefik.http.services.stable-diffusion.loadbalancer.server.scheme=http
+      - traefik.http.routers.stable-diffusion.service=stable-diffusion
+      - traefik.http.routers.stable-diffusion.tls=true
+networks:
+  default:
+    name: ainet
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
+    external: true
+

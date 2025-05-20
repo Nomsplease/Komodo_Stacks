@@ -1,0 +1,6 @@
+[[server]] # Declare a new server
+name = "superserver"
+tags = ["superserver"]
+[server.config]
+address = "https://periphery:8120"
+enabled = true

@@ -1,0 +1,81 @@
+################################
+# 🦎 KOMODO COMPOSE - MONGO 🦎 #
+################################
+
+## This compose file will deploy:
+##   1. MongoDB
+##   2. Komodo Core
+##   3. Komodo Periphery
+
+services:
+  mongo:
+    image: mongo
+    container_name: komodo-mongo
+    env_file: secrets.env
+    labels:
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    command: --quiet --wiredTigerCacheSizeGB 0.25
+    restart: unless-stopped
+    logging:
+      driver: ${COMPOSE_LOGGING_DRIVER:-local}
+    networks:
+      - default
+    volumes:
+      - /data/containers/komodo/mongo/db:/data/db
+      - /data/containers/komodo/mongo/configdb:/data/configdb
+
+  core:
+    image: ghcr.io/moghtech/komodo-core:${COMPOSE_KOMODO_IMAGE_TAG:-latest}
+    container_name: komodo-core
+    env_file: secrets.env
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    logging:
+      driver: ${COMPOSE_LOGGING_DRIVER:-local}
+    networks:
+      - default
+      - traefik_proxy
+    ports:
+      - 9120:9120
+    volumes:
+      - /data/containers/komodo/repo-cache:/repo-cache
+      - /data/containers/komodo/syncs:/syncs
+      - /data/containers/komodo/core.config:/config:ro
+    labels:
+      - komodo.skip=null # Prevent Komodo from stopping with StopAllContainers
+      - traefik.enable=true
+      - traefik.http.routers.komodo.entrypoints=websecure
+      - traefik.http.routers.komodo.rule=Host(`komodo.noms.tv`)
+      - traefik.http.services.komodo.loadbalancer.server.port=9120
+      - traefik.http.services.komodo.loadbalancer.server.scheme=http
+      - traefik.http.routers.komodo.service=komodo
+      - traefik.http.routers.komodo.tls=true
+
+  periphery:
+    image: ghcr.io/moghtech/komodo-periphery:${COMPOSE_KOMODO_IMAGE_TAG:-latest}
+    container_name: komodo-periphery
+    env_file: secrets.env
+    labels:
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    networks:
+      - default
+    restart: unless-stopped
+    logging:
+      driver: ${COMPOSE_LOGGING_DRIVER:-local}
+    environment:
+      PERIPHERY_REPO_DIR: ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}/repos
+      PERIPHERY_STACK_DIR: ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}/stacks
+      PERIPHERY_SSL_KEY_FILE: ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}/ssl/key.pem
+      PERIPHERY_SSL_CERT_FILE: ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}/ssl/cert.pem
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/proc
+      - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
+      - /usr/bin/op:/usr/bin/op
+
+networks:
+  default: {}
+  traefik_proxy:
+    name: traefik_proxy
+    external: true

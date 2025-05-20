@@ -1,0 +1,111 @@
+## Cloudflared
+[[stack]]
+name = "cloudflared"
+tags = ["superserver"]
+[stack.config]
+server = "superserver"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "superserver/cloudflared"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env -o secrets.env
+"""
+
+## Immich-ML
+[[stack]]
+name = "immich-ml"
+tags = ["superserver"]
+[stack.config]
+server = "superserver"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "superserver/immich-ml"
+
+## Komodo
+[[stack]]
+name = "komodo"
+tags = ["superserver"]
+[stack.config]
+server = "superserver"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "superserver/komodo"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env -o secrets.env
+"""
+
+## Ollama
+[[stack]]
+name = "ollama"
+tags = ["superserver"]
+[stack.config]
+server = "superserver"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "superserver/ollama"
+
+## SearXNG
+[[stack]]
+name = "searxng"
+tags = ["superserver"]
+[stack.config]
+server = "superserver"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "superserver/searxng"
+
+## Stable Diffusion
+[[stack]]
+name = "stable-diffusion"
+tags = ["superserver"]
+[stack.config]
+server = "superserver"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "superserver/stable-diffusion"
+pre_deploy.command = """
+## Pull Repo
+sh pull-repo.sh
+"""
+
+## Tdarr
+[[stack]]
+name = "tdarr"
+tags = ["superserver"]
+[stack.config]
+server = "superserver"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "superserver/tdarr"
+
+## Traefik
+[[stack]]
+name = "traefik-superserver"
+tags = ["superserver"]
+[stack.config]
+server = "superserver"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "superserver/traefik"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i secrets.env -o secrets.env
+"""

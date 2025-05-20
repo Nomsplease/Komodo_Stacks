@@ -1,0 +1,29 @@
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    networks:
+      - traefik_proxy
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /data/containers/searxng:/etc/searxng
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.searxng.entrypoints=websecure
+      - traefik.http.routers.searxng.rule=Host(`search.noms.tv`)
+      - traefik.http.services.searxng.loadbalancer.server.port=8080
+      - traefik.http.services.searxng.loadbalancer.server.scheme=http
+      - traefik.http.routers.searxng.service=searxng
+      - traefik.http.routers.searxng.tls=true
+networks:
+  default:
+    name: ainet
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
+    external: true
+

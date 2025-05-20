@@ -1,0 +1,18 @@
+services:
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    image: ghcr.io/immich-app/immich-machine-learning:v1.129.0-cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities:
+                - gpu
+    volumes:
+      - /data/containers/immich-ml:/cache
+    restart: always
+    ports:
+      - 3003:3003
+

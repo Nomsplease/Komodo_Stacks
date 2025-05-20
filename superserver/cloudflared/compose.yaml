@@ -1,0 +1,13 @@
+services:
+  cloudflared:
+    command: tunnel run --token $TUNNEL_TOKEN
+    image: cloudflare/cloudflared:2025.4.2
+    container_name: cloudflared
+    env_file: secrets.env
+    networks:
+      - traefik_proxy
+    restart: unless-stopped
+networks:
+ traefik_proxy:
+   name: traefik_proxy
+   external: true

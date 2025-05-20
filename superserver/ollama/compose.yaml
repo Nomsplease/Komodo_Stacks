@@ -1,0 +1,43 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - OLLAMA_KEEP_ALIVE=1h
+      - OLLAMA_HOST=0.0.0.0
+      - ENABLE_IMAGE_GENERATION=True
+      - COMFYUI_BASE_URL=http://stable-diffusion-webui:7860
+    networks:
+      - default
+      - traefik_proxy
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /data/containers/ollama:/root/.ollama
+    ports:
+      - 11434:11434
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities:
+                - gpu
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ollama.entrypoints=websecure
+      - traefik.http.routers.ollama.rule=Host(`ollama.noms.tv`)
+      - traefik.http.services.ollama.loadbalancer.server.port=11434
+      - traefik.http.services.ollama.loadbalancer.server.scheme=http
+      - traefik.http.routers.ollama.service=ollama
+      - traefik.http.routers.ollama.tls=true
+networks:
+  default:
+    name: ainet
+  traefik_proxy:
+    name: traefik_proxy
+    external: true
