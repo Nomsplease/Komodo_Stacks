@@ -1,0 +1,30 @@
+services:
+  proxmox-backup-server:
+    container_name: proxmox-backup-server
+    image: ayufan/proxmox-backup-server:latest
+    restart: unless-stopped
+    networks:
+      - traefik_proxy
+    ports:
+      - 8007:8007
+    environment:
+      - TZ=America/New_York
+    tmpfs:
+      - /run
+    volumes:
+      - /mnt/AppData/PBS/etc:/etc/proxmox-backup
+      - /mnt/AppData/PBS/log:/var/log/proxmox-backup
+      - /mnt/AppData/PBS/lib:/var/lib/proxmox-backup
+      - /mnt/BigPool/Proxmox/BackupServer:/Datastore
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pbs.entrypoints=https
+      - traefik.http.routers.pbs.rule=Host(`pbs.int.noms.tv`)
+      - traefik.http.services.pbs.loadbalancer.server.port=8007
+      - traefik.http.services.pbs.loadbalancer.server.scheme=https
+      - traefik.http.routers.pbs.service=pbs
+      - traefik.http.routers.pbs.tls=true
+networks:
+  traefik_proxy:
+    name: traefik_proxy
+    external: true

@@ -230,6 +230,18 @@ git_account = "Nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/prowlarr"
 
+## Proxmox Backup Server
+[[stack]]
+name = "proxmox-backup-server"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/proxmox-backup-server"
+
 ## Radarr
 [[stack]]
 name = "radarr"
