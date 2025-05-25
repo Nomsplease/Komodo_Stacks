@@ -1,0 +1,25 @@
+services:
+  frame:
+    container_name: immich-frame
+    networks:
+      - traefik_proxy
+    env_file: frame.env
+    image: ghcr.io/immichframe/immichframe:latest
+    # ports:
+    #   - '9000:9000'
+    #   - '9001:9001'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.immich-frame.entrypoints=websecure
+      - traefik.http.routers.immich-frame.rule=Host(`photo-frame.noms.tv`)
+      - traefik.http.services.immich-frame.loadbalancer.server.port=8000
+      - traefik.http.services.immich-frame.loadbalancer.server.scheme=http
+      - traefik.http.routers.immich-frame.service=immich-frame
+      - traefik.http.routers.immich-frame.tls=true
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Immich/Frame:/app/Config
+networks:
+  traefik_proxy:
+    name: traefik_proxy
+    external: true

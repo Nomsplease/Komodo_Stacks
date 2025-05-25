@@ -94,6 +94,22 @@ git_account = "Nomsplease"
 repo = "Nomsplease/Komodo_Stacks"
 run_directory = "truenas/huntarr"
 
+## Immich
+[[stack]]
+name = "immich"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/immich"
+pre_deploy.command = """
+## Inject 1Pass Secrets
+op inject -f -i frame.env -o frame.env
+"""
+
 ## Jellyfin
 [[stack]]
 name = "jellyfin"
