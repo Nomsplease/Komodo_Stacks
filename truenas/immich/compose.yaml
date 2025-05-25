@@ -12,7 +12,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.immich-frame.entrypoints=websecure
       - traefik.http.routers.immich-frame.rule=Host(`photo-frame.noms.tv`)
-      - traefik.http.services.immich-frame.loadbalancer.server.port=8000
+      - traefik.http.services.immich-frame.loadbalancer.server.port=8080
       - traefik.http.services.immich-frame.loadbalancer.server.scheme=http
       - traefik.http.routers.immich-frame.service=immich-frame
       - traefik.http.routers.immich-frame.tls=true
