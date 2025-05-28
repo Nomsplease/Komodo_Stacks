@@ -21,7 +21,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.jellyfin.entrypoints=websecure
-      - traefik.http.routers.jellyfin.rule=Host(`jellyfin.noms.tv`)
+      - traefik.http.routers.jellyfin.rule=Host(`jellyfin.noms.tv`) || Host(`jellyfin.int.noms.tv`)
       - traefik.http.services.jellyfin.loadbalancer.server.port=8096
       - traefik.http.services.jellyfin.loadbalancer.server.scheme=http
       - traefik.http.routers.jellyfin.service=jellyfin
