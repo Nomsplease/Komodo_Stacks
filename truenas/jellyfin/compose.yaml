@@ -9,6 +9,8 @@ services:
       - PGID=568
       - TZ=America/New_York
       - DOCKER_MODS=linuxserver/mods:jellyfin-opencl-intel-25.13.33276.16
+    ports:
+      - '8096:8096'
     devices:
       - /dev/dri:/dev/dri
     image: lscr.io/linuxserver/jellyfin:latest
