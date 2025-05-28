@@ -1,0 +1,28 @@
+services:
+  watchstate:
+    container_name: watchstate
+    user: 568:568
+    networks:
+      - default
+      - traefik_proxy
+    environment:
+      - TZ=America/New_York
+    image: ghcr.io/arabcoders/watchstate:latest
+    restart: unless-stopped
+    volumes:
+      - /mnt/AppData/Watchstate:/config
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.watchstate.entrypoints=websecure
+      - traefik.http.routers.watchstate.rule=Host(`watchstate.noms.tv`)
+      - traefik.http.services.watchstate.loadbalancer.server.port=8080
+      - traefik.http.services.watchstate.loadbalancer.server.scheme=http
+      - traefik.http.routers.watchstate.service=watchstate
+      - traefik.http.routers.watchstate.tls=true
+networks:
+  default:
+    name: media_services
+    external: true
+  traefik_proxy:
+    name: traefik_proxy
+    external: true
