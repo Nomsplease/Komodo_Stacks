@@ -8,6 +8,7 @@ services:
       - PUID=568
       - PGID=568
       - TZ=America/New_York
+      - DOCKER_MODS=linuxserver/mods:jellyfin-opencl-intel
     devices:
       - /dev/dri:/dev/dri
     image: lscr.io/linuxserver/jellyfin:latest
