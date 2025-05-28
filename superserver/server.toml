@@ -2,5 +2,5 @@
 name = "superserver"
 tags = ["superserver"]
 [server.config]
-address = "https://periphery:8120"
+address = "https://172.16.0.30:8120"
 enabled = true
