@@ -1,6 +1,7 @@
 services:
   watchstate:
     container_name: watchstate
+    user: 568:568
     networks:
       - default
       - traefik_proxy
