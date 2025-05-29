@@ -10,7 +10,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.garage-s3.entrypoints=websecure
-      - traefik.http.routers.garage-s3.rule="Host(`s3-new.noms.tv`) || HostRegexp(`^.+\.s3-new\.noms\.tv$`)"
+      - "traefik.http.routers.garage-s3.rule=HostRegexp(`{subdomain:.+}.s3-new.noms.tv`) || Host(`s3-new.noms.tv`)"
       - traefik.http.services.garage-s3.loadbalancer.server.port=3900
       - traefik.http.services.garage-s3.loadbalancer.server.scheme=http
       - traefik.http.routers.garage-s3.service=garage-s3
