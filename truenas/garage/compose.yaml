@@ -9,12 +9,12 @@ services:
     #   - '3902:3902' #S3 Web Port
     labels:
       - traefik.enable=true
-      - traefik.http.routers.garage-s3.entrypoints=websecure
-      - "traefik.http.routers.garage-s3.rule=Host(`s3-new.noms.tv`) || HostRegexp(`{subdomain:.+}.s3-new.noms.tv`)"
-      - traefik.http.services.garage-s3.loadbalancer.server.port=3900
-      - traefik.http.services.garage-s3.loadbalancer.server.scheme=http
-      - traefik.http.routers.garage-s3.service=garage-s3
-      - traefik.http.routers.garage-s3.tls=true
+      - traefik.http.routers.garage.entrypoints=websecure
+      - "traefik.http.routers.garage.rule=Host(`garage.noms.tv`) || HostRegexp(`{subdomain:.+}.garage.noms.tv`)"
+      - traefik.http.services.garage.loadbalancer.server.port=3900
+      - traefik.http.services.garage.loadbalancer.server.scheme=http
+      - traefik.http.routers.garage.service=garage
+      - traefik.http.routers.garage.tls=true
     restart: unless-stopped
     volumes:
       - /mnt/AppData/Garage/garage.toml:/etc/garage.toml
