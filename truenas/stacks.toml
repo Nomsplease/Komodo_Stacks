@@ -82,6 +82,19 @@ pre_deploy.command = """
 op inject -f -i secrets.env -o secrets.env
 """
 
+## Garage
+[[stack]]
+name = "garage"
+tags = ["truenas"]
+[stack.config]
+server = "truenas"
+poll_for_updates = true
+auto_update = true
+git_account = "Nomsplease"
+repo = "Nomsplease/Komodo_Stacks"
+run_directory = "truenas/garage"
+
+
 ## Huntarr
 [[stack]]
 name = "huntarr"
