@@ -14,13 +14,7 @@ services:
       - traefik.http.services.garage-s3.loadbalancer.server.port=3900
       - traefik.http.services.garage-s3.loadbalancer.server.scheme=http
       - traefik.http.routers.garage-s3.service=garage-s3
-      - traefik.http.routers.garage-s3e.tls=true
-      - traefik.http.routers.garage-s3-web.entrypoints=websecure
-      - traefik.http.routers.garage-s3-web.rule="Host(`s3-web.noms.tv`) || HostRegexp(`^.+\.s3-web\.noms\.tv$`)"
-      - traefik.http.services.garage-s3-web.loadbalancer.server.port=3902
-      - traefik.http.services.garage-s3-web.loadbalancer.server.scheme=http
-      - traefik.http.routers.garage-s3-web.service=garage-s3-web
-      - traefik.http.routers.garage-s3-web.tls=true
+      - traefik.http.routers.garage-s3.tls=true
     restart: unless-stopped
     volumes:
       - /mnt/AppData/Garage/garage.toml:/etc/garage.toml
