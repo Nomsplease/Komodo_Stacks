@@ -14,18 +14,6 @@ pre_deploy.command = """
 op inject -f -i secrets.env -o secrets.env
 """
 
-## Immich-ML
-[[stack]]
-name = "immich-ml"
-tags = ["superserver"]
-[stack.config]
-server = "superserver"
-poll_for_updates = true
-auto_update = true
-git_account = "Nomsplease"
-repo = "Nomsplease/Komodo_Stacks"
-run_directory = "superserver/immich-ml"
-
 ## Komodo
 [[stack]]
 name = "komodo"
